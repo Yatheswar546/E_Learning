@@ -14,6 +14,12 @@
 		// echo "Connected Successfully";
 	}
 
+	$courses = mysqli_query($db,"SELECT * FROM `courses`");
+	$courses_count = mysqli_num_rows($courses);
+
+	$categories = mysqli_query($db,"SELECT * FROM `categories`");
+	$categories_count = mysqli_num_rows($categories);
+
 ?>
 
 <!DOCTYPE html>
@@ -156,14 +162,14 @@
 				<li>
 					<i class='bx bx-book-reader' ></i>					
 					<span class="text">
-						<h3>10</h3>
+						<h3><?php echo $categories_count; ?></h3>
 						<p>Categories</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-school'></i>
 					<span class="text">
-						<h3>64</h3>
+						<h3><?php echo $courses_count; ?></h3>
 						<p>Courses</p>
 					</span>
 				</li>

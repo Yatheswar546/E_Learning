@@ -1,6 +1,31 @@
 <?php
     session_start();
     if($_SESSION['id'] == true){
+		
+		// Database Connection
+		require_once('../config.php');
+
+		// Check Connetion
+		if(!$db){
+			die("Connection Failed!!!".mysqli_connect_error());
+		}
+		else{
+			// echo "Connected Successfully";
+		}
+
+		$courses = mysqli_query($db,"SELECT * FROM `courses`");
+		$courses_count = mysqli_num_rows($courses);
+
+		$users = mysqli_query($db,"SELECT * FROM `user_form`");
+		$users_count = mysqli_num_rows($users);
+
+		$free_courses = mysqli_query($db,"SELECT * FROM `courses` WHERE type='Free'");
+		$free_courses_count = mysqli_num_rows($free_courses);
+
+		$paid_courses = mysqli_query($db,"SELECT * FROM `courses` WHERE type='Not Free'");
+		$paid_courses_count = mysqli_num_rows($paid_courses);
+
+		
 ?>
 
 <!DOCTYPE html>
@@ -143,28 +168,28 @@
 				<li>
 					<i class='bx bx-book-reader' ></i>					
 					<span class="text">
-						<h3>10</h3>
+						<h3><?php echo $courses_count; ?></h3>
 						<p>Courses</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>2834</h3>
+						<h3><?php echo $users_count; ?></h3>
 						<p>Users</p>
 					</span>
 				</li>
                 <li>
 					<i class='bx bxs-cart-alt'></i>
 					<span class="text">
-						<h3>2834</h3>
+						<h3><?php echo $free_courses_count; ?></h3>
 						<p>Free Courses</p>
 					</span>
 				</li>
                 <li>
                     <i class='bx bxs-wallet-alt'></i>					
                     <span class="text">
-						<h3>2834</h3>
+						<h3><?php echo $paid_courses_count; ?></h3>
 						<p>Paid Courses</p>
 					</span>
 				</li>
@@ -207,21 +232,11 @@
                                 <td><p><a href="..\courses\lectureDetails.php"><i class='bx bx-info-circle'></i></a></p></td>
                                 <td><p>Free</p></td>
 								<td><p>$50.00</p></td>
-                                <td><a href="..\courses\courseEdit.html"><i class='bx bx-edit-alt'></i></a>
+                                <td><a href="..\courses\courseEdit.php"><i class='bx bx-edit-alt'></i></a>
 								<i class='bx bxs-trash'></i>
                                 </td>
                             </tr> -->
 							<?php 
-                            	// Database Connection
-                            	require_once('../config.php');
-
-                            	// Check Connetion
-                            	if(!$db){
-                            	    die("Connection Failed!!!".mysqli_connect_error());
-                            	}
-                            	else{
-                            	    // echo "Connected Successfully";
-                            	}
 
 								// read the data from courses table
 								$result = mysqli_query($db,"SELECT * FROM `courses`");
@@ -242,8 +257,8 @@
 												<td><p><a href='./lectureDetails.php?id=$row[id]'><i class='bx bx-info-circle'></i></a></p></td>
 												<td><p>$row[type]</p></td>
 												<td><p>$row[price]</p></td>
-												<td><a href='..\courses\courseEdit.html'><i class='bx bx-edit-alt'></i></a>
-												<i class='bx bxs-trash'></i>
+												<td><a href='..\courses\courseEdit.php?id=$row[id]'><i class='bx bx-edit-alt'></i></a>
+												<a href='..\courses\coursedelete.php?id=$row[id]'><i class='bx bxs-trash'></i></a>
 												</td>
 											</tr>
 										";

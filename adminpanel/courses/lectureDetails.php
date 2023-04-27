@@ -49,7 +49,6 @@
 
 <body>
 
-
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
@@ -129,7 +128,6 @@
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
-
 
 
 	<!-- CONTENT -->
@@ -219,8 +217,8 @@
 								<td>
 									<p> <?php echo $price; ?> </p>
 								</td>
-								<td><a href="..\courses\lectureEdit.html"><i class='bx bx-edit-alt'></i></a></td>
-								<td><i class='bx bxs-trash'></i></td>
+								<?php echo " <td><a href='..\courses\courseEdit.php?id=$row[id]'><i class='bx bx-edit-alt'></i></a></td>" ?>
+								<?php echo " <td><a href='..\courses\lecturedelete.php?id=$row[id]'><i class='bx bxs-trash'></a></i></td>" ?>
 							</tr>
 						</tbody>
 					</table>

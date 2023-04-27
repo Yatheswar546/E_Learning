@@ -40,14 +40,6 @@
         $image_target_file = $image_target.basename(md5("userid".$_FILES['image']['name']).".".$image_filetype); //target final path
         $imagefile = md5("userid".$_FILES['image']['name']).".".$image_filetype; // file created
 
-		// $video_filename = $_FILES['video']['name'];
-		// $video_filetype = $_FILES['video']['type'];
-		// $video_tempname = $_FILES['video']['tmp_name'];
-		// $vide_filesize = $_FILES['video']['size'];
-		// $videofile = md5("userid".$_FILES['video']['name']).".".$video_filetype; // file created
-		// $video_target = "../database/videos/";
-		// $video_target_file = $video_target.basename(md5("userid".$_FILES['video']['name']).".".$video_filetype); //target final path
-
 		$video_filename = $_FILES['video']['name'];
 		$video_filetype = strtolower(pathinfo($_FILES['video']['name'], PATHINFO_EXTENSION)); // file extension
 		$video_tempname = $_FILES['video']['tmp_name'];
@@ -56,7 +48,6 @@
 		$video_target = "../database/videos/";
 		$video_target_file = $video_target.$videofile; //target final path
 
-		
 
 		do{
 			if(empty($title) || empty($category) || empty($description) || empty($type) || empty($price)){

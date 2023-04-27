@@ -1,6 +1,10 @@
 <?php
   session_start();
-
+  if(isset($_SESSION['id'])){
+  
+    $id = $_SESSION['id'];
+    $userid = $_SESSION['userid'];
+    // echo $userid;
   // Database Connection
 	require('./config.php');
 	
@@ -12,38 +16,70 @@
 		// echo "Success";
 	}
 
-  if(isset($_SESSION['id'])){
-    $id = $_SESSION['id'];
-    $sql = mysqli_query($conn,"SELECT * from user_form WHERE id = '$id'");
-    $row = mysqli_fetch_assoc($sql);
-    $name = $row['name'];
-    $email = $row['email'];
+  
+  $sql = mysqli_query($conn,"SELECT * from user_form WHERE id = '$id'");
+  $row = mysqli_fetch_assoc($sql);
+  $name = $row['name'];
+  $email = $row['email'];
 
-    $details = mysqli_query($conn,"SELECT * FROM `profile`");
+  $details = mysqli_query($conn,"SELECT * FROM `profile` WHERE profile_id='$userid'");
+  if($details === false) {
+    // Handle the error, e.g. log it, display an error message, etc.
+    echo "Error: " . mysqli_error($conn);
+  }
+  elseif(mysqli_num_rows($details)>0){
     $row1 = mysqli_fetch_assoc($details);
+    $city = $row1['city'];
+    $country = $row1['country'];
+    $college = $row1['college'];
+    $fname = $row1['fname'];
+    $lname = $row1['lname'];
+    $branch = $row1['branch'];
+    $address = $row1['address'];
+    $postal = $row1['postal_code'];
+    $about = $row1['about'];
+    $image = $row1['image'];
+  }
+  else{
+    $city = "";
+    $country = "";
+    $college = "";
+    $fname = "";
+    $lname = "";
+    $branch = "";
+    $address = "";
+    $postal = "";
+    $about = "";
+    $image = "";
+  }
     
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="./css/profile.css">
 </head>
 
 <body>
+
+  <!--------------------------------MAIN CONTENT -------------------------------------------------->
   <div class="main-content">
     <!------------------------------------ Top navbar -------------------------------------->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!--------------------------------- Brand ------------------------------->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="">User profile</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.php" style="margin-left:10px;">Back to Home</a>
         <!------------------------ Form ---------------------------->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">
@@ -61,9 +97,15 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
               <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <?php echo "<img src='./images/db_images/{$row1['image']}'>"; ?>
-                </span>
+                <?php if(isset($image)): ?>
+                  <span class="avatar avatar-sm rounded-circle">
+                    <?php echo "<img src='./images/db_images/{$image}'>"; ?>
+                  </span>
+                <?php elseif(!isset($image)): ?>
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img src="./images/pp.png" alt="">
+                  </span>
+                <?php endif; ?>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?php echo $name; ?></span>
                 </div>
@@ -126,9 +168,15 @@
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
+                  <?php if(isset($image)): ?>
                   <a href="#">
-                  <?php echo "<img src='./images/db_images/{$row1['image']}'>"; ?>
+                    <?php echo "<img src='./images/db_images/{$image}'>"; ?>
                   </a>
+                  <?php else: ?>
+                  <a href="#">
+                    <img src="./images/pp.png" alt="">
+                  </a>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
@@ -162,13 +210,13 @@
                 <h3><?php echo $name; ?></h3><span class="font-weight-light"></span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><?php echo $row1['city']; ?> , <?php echo $row1['country']; ?>
+                  <i class="ni location_pin mr-2"></i><?php echo $city ?> , <?php echo $country; ?>
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni branch_briefcase-24 mr-2"></i>Computer Science Engineer
+                  <i class="ni branch_briefcase-24 mr-2"></i><?php echo $branch; ?>
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i><h3><?php echo $row1['college']; ?></h3>
+                  <i class="ni education_hat mr-2"></i><h3><?php echo $college; ?></h3>
                 </div>
                 <hr class="my-4">
                 <p>About technical skills.</p>
@@ -178,7 +226,7 @@
           </div>
           <div class="certificates">
             <h1 class="heading">Certificates</h1>
-            <img src="./images/cert.jpg" alt="">
+            <img src="./images/profile_certificate.png" alt="">
             <a href="#" class="btn btn-info btn-sm ">See all</a>
           </div>
         </div>
@@ -218,13 +266,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <h4><?php echo $row1['fname']; ?></h4>
+                        <h4><?php echo $fname; ?></h4>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <h4><?php echo $row1['lname']; ?></h4>
+                        <h4><?php echo $lname; ?></h4>
                       </div>
                     </div>
                   </div>
@@ -232,13 +280,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-branch">Branch</label>
-                        <h4><?php echo $row1['branch']; ?></h4>
+                        <h4><?php echo $branch; ?></h4>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">College</label>
-                        <h4><?php echo $row1['college']; ?></h4>
+                        <h4><?php echo $college; ?></h4>
                       </div>
                     </div>
                   </div>
@@ -251,7 +299,7 @@
                     <div class="col-md-12">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <h4><?php echo $row1['address']; ?></h4>
+                        <h4><?php echo $address; ?></h4>
                       </div>
                     </div>
                   </div>
@@ -259,19 +307,19 @@
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-city">City</label>
-                        <h4><?php echo $row1['city']; ?></h4>
+                        <h4><?php echo $city; ?></h4>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-country">Country</label>
-                        <h4><?php echo $row1['country']; ?></h4>
+                        <h4><?php echo $country; ?></h4>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <h4><?php echo $row1['postal_code']; ?></h4>
+                        <h4><?php echo $postal; ?></h4>
                       </div>
                     </div>
                   </div>
@@ -282,7 +330,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group focused">
                     <label>About Me</label>
-                    <h4><?php echo $row1['about']; ?></h4>
+                    <h4><?php echo $about; ?></h4>
                   </div>
                 </div>
               </form>
@@ -302,7 +350,39 @@
 
       <div class="box-container">
 
-        <div class="box">
+        <?php
+          $courses = mysqli_query($conn,"SELECT enrollment.*, courses.*
+          FROM enrollment
+          JOIN courses ON enrollment.courseid = courses.courseid
+          WHERE enrollment.userid = '$userid'");
+
+          // $count = mysqli_num_rows($courses);
+          if(mysqli_num_rows($courses)>0){
+            while($row = mysqli_fetch_assoc($courses)){
+              echo "
+                <div class='box'>
+                  <div class='image'>
+                    <img src='./adminpanel/database/courses/$row[image]' alt=''>
+                  </div>
+                  <div class='content'> 
+                    <h3>$row[title]</h3>
+                    <p>$row[description]</p>
+                    <a href='./singlecourse.php?id=$row[id]' class='btn'>read more</a>
+                    <div class='icons'>
+                      <span> <i class='fas fa-calendar'></i> $row[createdat] </span>
+                      <span> <i class='fas fa-user'></i> By Admin </span>
+                    </div>
+                </div>
+              ";
+            }
+          }
+          else{
+            echo "No courses Enrolled !!!";
+          }
+
+        ?>
+
+        <!-- <div class="box">
           <div class="image">
             <img src="images/1.jpeg" alt="">
           </div>
@@ -345,7 +425,7 @@
               <span> <i class="fas fa-user"></i> by admin </span>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 

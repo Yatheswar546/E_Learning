@@ -13,6 +13,12 @@
 		// echo "Success";
 	}
 
+	$users = mysqli_query($db,"SELECT * FROM `user_form`");
+	$users_count = mysqli_num_rows($users);
+
+	$teachers = mysqli_query($db,"SELECT * FROM `teachers`");
+	$teachers_count = mysqli_num_rows($teachers);
+
 ?>
 
 <!DOCTYPE html>
@@ -154,15 +160,15 @@
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>284</h3>
+						<h3><?php echo $users_count; ?></h3>
 						<p>Users</p>
 					</span>
 				</li> 
                 <li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>240</h3>
-						<p>Students</p>
+						<h3><?php echo $teachers_count; ?></h3>
+						<p>Teachers</p>
 					</span>
 				</li>
                 <li>
@@ -215,29 +221,7 @@
 										";
 									}
 								}
-							?>
-
-							<tr>
-                                <td><p>1</p></td>
-								<td><img src="..\img/people.png">
-									<p>John Doe</p></td>
-								<td><p>anu@gmail.com</p></td>
-								<td>9391052445</td>
-								<td><a href="adminsedit.php"><i class='bx bx-edit-alt'></i></a>
-									<i class='bx bxs-trash'></i>
-									</td>
-							</tr>
-							<tr>
-                                <td><p>1</p></td>
-                                <td><img src="..\img/people.png">
-                                    <p>John Doe</p></td>
-                                <td><p>anu@gmail.com</p></td>
-                                <td>9391052445</td>
-								<td><a href="..\admins\adminsedit.php"><i class='bx bx-edit-alt'></i></a>
-									<i class='bx bxs-trash'></i>
-									</td>
-                        </tr>
-                     
+							?>                     
                                               
 						</tbody>
 					</table>

@@ -38,6 +38,7 @@
 		    $price = $row['price'];
         $image = $row['image'];
         $courseid = $row['courseid'];
+        $type = $row['type'];
 	}
 ?>
 
@@ -138,39 +139,47 @@
           </div>
 
           <div class="enroll">
-              <h3>This course include:</h3>
-                  <p><i class='bx bxs-video-recording'></i></i>52 hours video</p>
-                  <p><i class='bx bxs-paper-plane'></i>75 articles</p>
-                  <p><i class='bx bx-cloud-download'></i>Download resources</p> 
-                  <p><i class='bx bx-infinite'></i>Full lifetime access</p>
-                  <p><i class='bx bx-mobile-alt'></i>Access on mobile and TV</p>
-                  <p><i class='bx bx-paperclip'></i>Assignment</p>
-                  <p><i class='bx bx-trophy'></i>Certificate of Completion</p>
+            <h3>This course include:</h3>
+            <p><i class='bx bxs-video-recording'></i></i>52 hours video</p>
+            <p><i class='bx bxs-paper-plane'></i>75 articles</p>
+            <p><i class='bx bx-cloud-download'></i>Download resources</p> 
+            <p><i class='bx bx-infinite'></i>Full lifetime access</p>
+            <p><i class='bx bx-mobile-alt'></i>Access on mobile and TV</p>
+            <p><i class='bx bx-paperclip'></i>Assignment</p>
+            <p><i class='bx bx-trophy'></i>Certificate of Completion</p>
                   
-                  <?php
+            <?php
+              // check the enrollment data
+              $sql = mysqli_query($conn,"SELECT * FROM `enrollment` WHERE userid = '$userid' AND courseid = '$courseid'");
+              
+              if(mysqli_num_rows($sql)>0){
+              ?>
+                  <div class="enroll-btn">
+                   <a href="./coursecontent.php?courseid=<?php echo $courseid; ?>" class="blue">Go to Course</a>
+                  </div>
+              <?php
+              } 
+              else{
+                  if($type == 'Free'){
+              ?> 
+                    <form action="./coursecontent.php" method="post">    
+                      <input type='hidden' name='courseid' value='<?php echo $courseid; ?>'>
+                      <div class="enroll-btn">
+                        <input type="submit" value="Enroll Course" class="blue">
+                      </div>
+                    </form>
 
-                    // check the enrollment data
-                    $sql = mysqli_query($conn,"SELECT * FROM `enrollment` WHERE userid = '$userid' AND courseid = '$courseid'");
-                    
-                    if(mysqli_num_rows($sql)>0){
-                      ?>
-                        <div class="enroll-btn">
-                         <a href="./coursecontent.php?courseid=<?php echo $courseid; ?>" class="blue">Go to Course</a>
-                        </div>
-                      <?php
-                    }
-                    else{
-                      ?>
-                        <form action="./coursecontent.php" method="post">    
-                          <input type='hidden' name='courseid' value='<?php echo $courseid; ?>'>
-                          <div class="enroll-btn">
-                            <input type="submit" value="Enroll Course" class="blue">
-                          </div>
-                        </form>  
-                      <?php
-                    }
-                  ?>
-
+              <?php                           
+                  }
+                  else{
+              ?>
+                      <div class="enroll-btn">
+                        <a href="./TxnTest.php?id=<?php echo $row['id']?>"><input type="submit" value="Enroll Course" class="blue"></a>
+                      </div>
+              <?php
+                  }
+              }
+            ?>
           </div>
       </section>
 

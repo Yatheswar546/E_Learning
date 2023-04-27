@@ -24,7 +24,7 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'>
   
   <!-- Font Awesome Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   
   <!-- Box Icons Link -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -32,6 +32,13 @@
   <!-- Custom CSS --> 
   <link rel="stylesheet" href="./css/style.css">
 
+  <!-- Slick Slider  -->
+  <link rel="stylesheet" href="./css/slick.css">
+  <link rel="stylesheet" href="./css/slick-theme.css">
+
+  <!-- Jquery CDN link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js">
+  
 </head>
  
 <body>
@@ -45,7 +52,7 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#trending">Trending</a></li>
       <li><a href="#categories">Categories</a></li>
-      <li><a href="#courses.php">Courses</a></li>
+      <li><a href="#courses">Courses</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul> 
@@ -71,10 +78,10 @@
       <h1>Accessible Online Courses For All</h1>
       <p>Own your future learning new skills online</p>
       <div class="latter">
-        <form class="form1">
+        <!-- <form class="form1">
           <input type="email" placeholder="Write Your Email" required>
           <input type="submit" value="Let's Start" required>
-        </form>
+        </form> -->
       </div>
     </div>
     <div class="home-img">
@@ -192,7 +199,7 @@
           }
         ?>
       </div>
-      <div id="load-More1"> Load More </div>
+      <!-- <div id="load-More1"> Load More </div> -->
     </div>
   </section>
 
@@ -247,14 +254,14 @@
         </div>
       </div>
 
-      <div id="load-more"> load more </div>
-      <div id="load-less">load less</div>
+      <div id="load-more"a><a href="./courses.php">See All</a></div>
+      <!-- <div>load less</div> -->
     </div>
   </section>
 
   <!---------------------- teachers ----------------------------------------->
-  <section id="teachers">
-    <div class="faculty">
+  <section class="team" id="teachers">
+    <!-- <div class="faculty">
       <h2>Our Featured <span>Teachers</span></h2>
       <div class="flexBox">
 
@@ -277,6 +284,44 @@
         <div class="teacher teacher2" data-name="Arun" data-field="Frontend Dev"></div>
         <div class="teacher teacher3" data-name="Kumari" data-field="Backend Dev"></div>
         <div class="teacher teacher4" data-name="Dileep" data-field="UX Specialist"></div>
+      </div>
+    </div> -->
+    <div class="container">
+      <div class="title">
+          <h2>Our Team</h2>
+      </div>
+
+      <i class="fa-solid fa-chevron-left prev"></i>
+      <i class="fa-solid fa-chevron-right next"></i>
+
+      <div class="teams">
+        <?php
+          // read data from teachers table
+          $teachers = mysqli_query($conn,"SELECT * FROM `teachers`");
+          if(!$teachers){
+            die("Invalid Query...".mysqli_connect_error());
+          }
+          else{
+            while($row = mysqli_fetch_assoc($teachers)){
+              echo "
+                <div class='team-member'>
+                  <div class='image-content'>
+                    <span class='overlay'></span>
+                      <div class='card-image'>
+                        <img src='./adminpanel/database/teachers/$row[image]' alt='' class='card-img'>
+                      </div>
+                  </div>
+    
+                  <div class='card-content'>
+                    <h2 class='name'>$row[name]</h2>
+                    <h3 class='role'>$row[course]</h3>
+                  </div>
+                </div>
+              ";
+            }
+          }
+        ?>
+      
       </div>
     </div>
   </section>
@@ -472,7 +517,7 @@
   <!-- Free Courses Section --> 
   <script>
 
-    let loadMoreBtn = document.querySelector('#load-more');
+    let loadMoreBtn = document.querySelector('#load-More1');
     let loadLessBtn = document.querySelector('#load-less');
     let currentItem = 3;
     loadLessBtn.style.display = 'none'
@@ -494,8 +539,14 @@
     }
   </script>
 
+  <!-- Jquery Script Tag -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
   <!-- Custom JS -->
   <script src="./js/script.js"></script>
+
+  <!-- Slick Js -->
+  <script src="./js/slick.min.js"></script>
 
 </body>
 

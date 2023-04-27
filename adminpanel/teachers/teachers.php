@@ -14,6 +14,9 @@
 		// echo "Success";
 	}
 
+	$users = mysqli_query($db,"SELECT * FROM `user_form`");
+	$users_count = mysqli_num_rows($users);
+
 ?>
 
 <!DOCTYPE html>
@@ -156,7 +159,7 @@
 				<li style="width: 270px;">
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>284</h3>
+						<h3><?php echo $users_count; ?></h3>
 						<p>Users</p>
 					</span>
 				</li>

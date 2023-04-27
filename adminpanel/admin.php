@@ -4,7 +4,23 @@
 		if(isset($_SESSION["image"]) && !empty($_SESSION["image"])){
 			// echo $_SESSION["image"];
 		}
-?>
+
+		// Database Connection
+		require('./config.php');
+
+		// Check Connection
+		if(!$db){
+			die("Connection Failed...".mysqli_connect_error());
+		}
+		else{
+			// echo "Success";
+		}
+		$courses = mysqli_query($db,"SELECT * FROM `courses`");
+		$courses_count = mysqli_num_rows($courses);
+
+		$users = mysqli_query($db,"SELECT * FROM `user_form`");
+		$users_count = mysqli_num_rows($users);
+?>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,14 +170,14 @@
 				<li>
 					<i class='bx bx-book-reader' ></i>					
 					<span class="text">
-						<h3>10</h3>
+						<h3><?php echo $courses_count; ?></h3>
 						<p>Courses</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>2834</h3>
+					<h3><?php echo $users_count; ?></h3>
 						<p>Users</p>
 					</span>
 				</li>

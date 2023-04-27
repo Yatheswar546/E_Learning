@@ -777,7 +777,8 @@ body{
 
 .container .box-container{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); */
+  grid-template-columns: repeat(3,1fr);
   gap:20px;
 }
 
@@ -871,6 +872,14 @@ body{
   cursor: pointer;
 }
 
+#load-more a{
+  color: black;
+}
+
+#load-more a:hover{
+  color: white;
+}
+
 #load-more, #load-More1{
   margin-top: 20px;
   display: inline-block;
@@ -887,6 +896,22 @@ body{
   background-color: #F26D71;
   border-color: #F26D71;
   color:#fff;
+}
+
+@media (max-width: 1023px){
+  .container .box-container {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+
+@media (max-width: 768px){
+  .container .box-container {
+    /* margin-left: 10%; */
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(1,1fr);
+  } 
 }
 
 @media (max-width:450px){
@@ -911,16 +936,162 @@ body{
     font-size: 12px;
   }
 
+
+
 }
 
 /* teachers */
 section#teachers{
-  padding: 80px 0;
+  padding: 30px 0;
   background-color: #ffe8f0;
   /* height: 100vh; */
 }
 
-section#teachers h2{
+.team .container{
+  width: 80%;
+  padding: 10px;
+  margin: 40px;
+  margin-top: 10px;
+  position: relative;
+  top: 0;
+  left: 7%;
+  /* border: 1px solid red; */
+}
+.team .container .title{
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+  color: #F26D71;
+  font-family: 'Roboto','sans-serif';
+}
+.team .container .title h1{
+  text-align: center;
+}
+.team .container .next{
+  position: absolute;
+  top: 50%;
+  right:0px;
+  font-size: 30px;
+  color: #F26D71;
+  cursor: pointer;
+}
+.team .container .prev{
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  font-size: 30px;
+  color: #F26D71;
+  cursor: pointer;
+}
+.team .teams{
+  width: 100%;
+  /* display: flex; */
+  /* border: 1px solid red; */
+}
+.team .teams .team-member{
+  width: 380px;
+  height: auto;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+.team .teams .team-member .image-content .overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f26d71c3;
+  border-radius: 25px 25px 0 25px;
+}
+.team .teams .team-member .card-image img{
+  width: 100%;
+  height: inherit;
+}
+/* .card{
+  width: 320px;
+  border-radius: 25px;
+  background-color: #fff;
+} */
+.team .image-content,
+.team .card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+.team .image-content{
+  row-gap: 5px;
+  position: relative;
+  padding: 25px 0;
+}
+.team .overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f26d71c3;
+  border-radius: 25px 25px 0 25px;
+}
+.team .overlay::before,
+.team .overlay::after{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: #f26d71c3;
+}
+.team .overlay::after{
+  border-radius: 0 25px 0 0;
+  background-color: #fff;
+}
+.team .card-image{ 
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
+}
+.team .card-image .card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #f26d71c3;
+}
+
+.team .name{
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+.team .role{
+  /* font-size: 14px; */
+  color: #707070;
+  text-align: center;
+}
+.team .button{
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 16px;
+  background-color: #f26d71c3;
+  border-radius: 6px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.team .button:hover{
+  background: #f26d71c3;
+}
+
+
+/* section#teachers h2{
   text-align: center;
   font-size: 32px;
   margin-bottom: 55px;
@@ -1040,7 +1211,7 @@ section#teachers .teacher::after{
 section#teachers .teacher:hover::after{
   opacity: 1;
   transition: 0.5s all ease-in-out 0.5s;
-}
+} */
 
 /* /teachers */
 

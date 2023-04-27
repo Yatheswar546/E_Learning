@@ -9,7 +9,7 @@
 		die("Connection Failed...".mysqli_connect_error());
 	}
 	else{
-		// echo "Success";
+		echo "Success";
 	}
 
   if(isset($_SESSION['id']) && isset($_SESSION['userid'])){ 
@@ -57,13 +57,21 @@
             else{
                 if($filetype == "png" || $filetype == "jpg" || $filetype == "jpeg"){
                     if(move_uploaded_file($_FILES['image']['tmp_name'],$target_file)){
-                        $sql = mysqli_query($conn,"INSERT INTO `profile`(`fname`, `lname`, `branch`, `college`, `address`, `city`, `country`, `postal_code`, `about`, `image`, `profile_id`) VALUES ('$fname','$lname','$branch','$college','$address','$city','$country','$postal_code','$about','$file','$profileid')");
-                        if($sql){
+                        // $sql = mysqli_query($conn,"INSERT INTO `profile`(`fname`, `lname`, `branch`, `college`, `address`, `city`, `country`, `postal_code`, `about`, `image`, `profile_id`) VALUES ('$fname','$lname','$branch','$college','$address','$city','$country','$postal_code','$about','$file','$profileid')");
+                        // if($sql){
+                        //     header("Location: profile.php");
+                        //     exit;
+                        // }
+                        // else{
+                        //     $errormsg = "Something went wrong".mysqli_error($conn);
+                        // }
+                        $stmt = $conn->prepare("INSERT INTO profile (fname, lname, branch, college, address, city, country, postal_code, about, image, profile_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param("sssssssssss", $fname, $lname, $branch, $college, $address, $city, $country, $postal_code, $about, $file, $profileid);
+                        if ($stmt->execute()) {
                             header("Location: profile.php");
                             exit;
-                        }
-                        else{
-                            $errormsg = "Something went wrong";
+                        } else {
+                            $errormsg = "Something went wrong: ".$stmt->error;
                         }
                     }
                     else{

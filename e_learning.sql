@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2023 at 11:36 PM
+-- Generation Time: Apr 27, 2023 at 08:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -65,7 +65,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `title`, `description`, `image`, `createdat`) VALUES
 (3, 'Web Development', 'Web Development is used very much now-a-days.', 0x31626165306365316231303335356263633066323634363939336337396239632e6a7067, '2023-03-11 04:04:36'),
 (4, 'Data Science', 'Web Development is used very much now-a-days. It has high demand', 0x36313439306665326637643238613535633839663333346136646230623031342e6a706567, '2023-03-11 04:58:51'),
-(5, 'Machine Learning', 'Machine Learning will boom in future...', 0x33656139336462363661323866343038303166393963616663653932643263392e6a706567, '2023-03-11 17:57:18');
+(5, 'Machine Learning', 'Machine Learning will boom in future...', 0x33656139336462363661323866343038303166393963616663653932643263392e6a706567, '2023-03-11 17:57:18'),
+(6, 'Digital Marketing', 'Digital Marketing is one of the  best profession for enterpreneurs & it is also used to generate passive income.', 0x61323339313836303430636437393461653238636236646262376437613764662e6a7067, '2023-04-27 13:10:17');
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,8 @@ CREATE TABLE `certificates` (
 --
 
 INSERT INTO `certificates` (`id`, `userid`, `score`, `courseid`, `certificateid`, `time`) VALUES
-(1, 'bab51882ee90b73d9b648654e107c4b0', '40', 'f2cd3ffe3ad2fbd66391d3e8e604baa6', 'certificate', '2023-04-24');
+(1, 'bab51882ee90b73d9b648654e107c4b0', '40', 'f2cd3ffe3ad2fbd66391d3e8e604baa6', 'certificate', '2023-04-24'),
+(2, 'bab51882ee90b73d9b648654e107c4b0', '0', 'f2cd3ffe3ad2fbd66391d3e8e604baa6', 'certificate', '2023-04-27');
 
 -- --------------------------------------------------------
 
@@ -113,8 +115,7 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `title`, `category`, `description`, `video`, `image`, `price`, `type`, `courseid`, `createdat`) VALUES
-(1, 'Web Development', 'Technology', 'Web Development is used very much now-a-days.', 0x36386535396562343066633331626136666133383464313964633136633637662e6d7034, 0x31626165306365316231303335356263633066323634363939336337396239632e6a7067, '$0.00', 'Free', 'd26354888e7f4270105ea4753b41df06', '2023-04-23'),
-(2, 'Machine Learning', 'Technology', 'Machine Learning will boom in future...', 0x62366464643466626333353632343438393231346563333935323838356665332e6d7034, 0x36313439306665326637643238613535633839663333346136646230623031342e6a706567, '$50.00', 'Not Free', 'f2cd3ffe3ad2fbd66391d3e8e604baa6', '2023-04-23');
+(2, 'Machine Learning', 'Technology', 'Machine Learning will boom in future...', NULL, 0x36313439306665326637643238613535633839663333346136646230623031342e6a706567, '$50.00', 'Not Free', 'f2cd3ffe3ad2fbd66391d3e8e604baa6', '2023-04-23');
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,8 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`id`, `fname`, `lname`, `branch`, `college`, `address`, `city`, `country`, `postal_code`, `about`, `image`, `profile_id`) VALUES
-(1, 'Vamsi Krishna', 'A', 'CSE', 'Veltech University', 'Yallabillivari Street , Reddy Kancharapalem', 'Visakhapatnam', 'India', '530008', 'I am a highly motivated computer science student with a strong passion for web development and coding. With a Codechef CCDSA certification (Foundation Level) under my belt, I have proven my ability to solve complex coding problems and understand fundamental algorithms and data structures.  I have completed several projects in web development, including a recent MERN stack project, which is a second-hand car agency where buyers can purchase second-hand cars, and dealers can add second-hand cars for sale. This project allowed me to apply my knowledge of MongoDB, Express, React, and Node.js to build a responsive and user-friendly platform that meets the needs of both buyers and sellers. During my recent internship as a Full Stack Developer, I worked on several projects, including a front-end project for a rental car agency using HTML, CSS, and JavaScript and a full-stack project for a graphic design consultancy using PHP and MySQL. I also had the opportunity to contribute to the development of an e-learning platform, where I served as the back-end developer.  Additionally, I have a basic understanding of machine learning and have worked on a few projects in this area. I have a keen eye for detail and strive to create clean and efficient code. As a Software Engineer Developer, I am confident that my skills and experience will enable me to make a valuable contribution to your team.', 0x36303139333664306462353331386230663666326131346138306462363438312e6a7067, 'bab51882ee90b73d9b648654e107c4b0');
+(1, 'Vamsi Krishna', 'A', 'CSE', 'Veltech University', 'Yallabillivari Street , Reddy Kancharapalem', 'Visakhapatnam', 'India', '530008', 'I am a highly motivated computer science student with a strong passion for web development and coding. With a Codechef CCDSA certification (Foundation Level) under my belt, I have proven my ability to solve complex coding problems and understand fundamental algorithms and data structures.  I have completed several projects in web development, including a recent MERN stack project, which is a second-hand car agency where buyers can purchase second-hand cars, and dealers can add second-hand cars for sale. This project allowed me to apply my knowledge of MongoDB, Express, React, and Node.js to build a responsive and user-friendly platform that meets the needs of both buyers and sellers. During my recent internship as a Full Stack Developer, I worked on several projects, including a front-end project for a rental car agency using HTML, CSS, and JavaScript and a full-stack project for a graphic design consultancy using PHP and MySQL. I also had the opportunity to contribute to the development of an e-learning platform, where I served as the back-end developer.  Additionally, I have a basic understanding of machine learning and have worked on a few projects in this area. I have a keen eye for detail and strive to create clean and efficient code. As a Software Engineer Developer, I am confident that my skills and experience will enable me to make a valuable contribution to your team.', 0x36303139333664306462353331386230663666326131346138306462363438312e6a7067, 'bab51882ee90b73d9b648654e107c4b0'),
+(2, 'Mahesh Kumar', 'Kovelapudi', 'Electronics and Communication Engineering', 'SRM University', 'Yallabillivari Street , Reddy Kancharapalem', 'Vijayawada', 'India', '530008', 'I\'m currently studying Electrical and Computer Engineering (ECE) at SRM University. I\'m interested in learning more about how technology can be used to solve real-world problems and improve people\'s lives. In my free time, I enjoy tinkering with electronics and programming. I\'m looking forward to meeting new people and exploring new ideas in the ECE community!\"', 0x34393630653663636232643061303135323964393365636534656565666266312e6a7067, '6b2e59d3b0660cc7aa20afbc187939fe');
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,8 @@ CREATE TABLE `user_form` (
 --
 
 INSERT INTO `user_form` (`id`, `name`, `email`, `password`, `role`, `userid`) VALUES
-(1, 'Vamsi Krishna', 'vamsistudent@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'user', 'bab51882ee90b73d9b648654e107c4b0');
+(1, 'Vamsi Krishna', 'vamsistudent@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'user', 'bab51882ee90b73d9b648654e107c4b0'),
+(6, 'Mahesh Kumar', 'maheshstudent@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'user', '6b2e59d3b0660cc7aa20afbc187939fe');
 
 --
 -- Indexes for dumped tables
@@ -334,13 +337,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `certificates`
 --
 ALTER TABLE `certificates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -370,7 +373,7 @@ ALTER TABLE `feedbacks`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teachers`
@@ -382,7 +385,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `user_form`
 --
 ALTER TABLE `user_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

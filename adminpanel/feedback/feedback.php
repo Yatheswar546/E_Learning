@@ -12,7 +12,11 @@
 	}
 	else{
 		// echo "Success";
-	}
+	} 
+
+	// read all data from database services table
+	$feedback = mysqli_query($db, "SELECT * FROM `feedbacks`");
+	$count = mysqli_num_rows($feedback);
 
 ?>
 <!DOCTYPE html>
@@ -149,7 +153,7 @@
                 <li style="width:270px;">
                     <i class='bx bx-abacus'></i>					
                     <span class="text">
-                        <h3>20</h3>
+                        <h3><?php echo $count; ?></h3>
                         <p>Count</p>
                     </span>
                 </li>
@@ -176,19 +180,7 @@
 						</thead>
 						<tbody>
 							<?php 
-								// Create Connection
-								$db = mysqli_connect('localhost','root','','e_learning');
-
-								// Check Connection
-								if(!$db){
-									die("Connection Failed!!!".mysqli_connect_error());
-								}
-								else{
-									// echo "Connected Successfully...";
-								}
-								// read all data from database services table
-								$feedback = mysqli_query($db, "SELECT * FROM `feedbacks`");
- 
+								 
 								if(!$feedback){
 									die("Invalid Query !!!". mysqli_connect_error());
 								}
@@ -208,28 +200,7 @@
 										";
 									}
 								}
-							?>
-							<tr>
-                                <td><p>1</p></td>
-                                <td><p>John Doe</p></td>
-                                <td><p>Anu@gmail.com</p></td>
-								<td><p>8265479310</p></td>
-                                <td><p>We Would like to have a course on Lifestyle and Fashion</p></td>
-							</tr>			
-							<tr>
-                                <td><p>1</p></td>
-                                <td><p>John Doe</p></td>
-                                <td><p>Anu@gmail.com</p></td>
-                                <td><p>8265479310</p></td>
-                                <td><p>We Would like to have a course on Lifestyle and Fashion</p></td>
-							</tr>			
-							<tr>
-                                <td><p>1</p></td>
-                                <td><p>John Doe</p></td>
-                                <td><p>Anu@gmail.com</p></td>
-                                <td><p>8265479310</p></td>
-                                <td><p>We Would like to have a course on Lifestyle and Fashion</p></td>
-							</tr>			
+							?>			
 							
 						</tbody>
 					</table>
